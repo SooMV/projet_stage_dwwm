@@ -1,1 +1,1 @@
-web: gunicorn projet_stage_dwwm.wsgi
+web: gunicorn store.wsgi:application
