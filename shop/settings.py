@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 import environ
+
+# laision de la db sur render 
+import dj_database_url
+
 # Customisation des messages flash
 from django.contrib.messages import constants as messages
 
@@ -29,7 +33,7 @@ environ.Env.read_env(BASE_DIR/".env")
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://projet-stage-dwwm.onrender.com']
 
@@ -103,6 +107,12 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# URL la db sur render 
+DATABASES["default"] = dj_database_url.parse("postgres://projet_stage_dwwm_user:UiJYXWbVUnVVDrW44tbzvW8SW9HOE3SI@dpg-cpm3djlds78s738t4nl0-a.frankfurt-postgres.render.com/projet_stage_dwwm")
+
+ 
 
 # DATABASES = {
 #     'default': dj_database_url.config(
