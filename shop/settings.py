@@ -31,7 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://projet-stage-dwwm.onrender.com']
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -103,6 +103,14 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default=env('DATABASE_URL'),
+      
+#     )
+# }
 
 
 # Password validation
@@ -183,6 +191,10 @@ SIMTAO_API_KEY= env("SIMTAO_API_KEY")
 
 # ajout du dossier static pour le CSS
 STATICFILES_DIRS = [ BASE_DIR / "static"]
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'bg-blue-100 border border-blue-400 text-blue-700',
