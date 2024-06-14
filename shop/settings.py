@@ -36,12 +36,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
 # settings.py
 
-ALLOWED_HOSTS = [
-    env("ALLOWED_HOSTS1"),
-    env("ALLOWED_HOSTS2"),
-    env("ALLOWED_HOSTS3"),
-]
 
+ALLOWED_HOSTS = ['https://projet-stage-dwwm.onrender.com', '127.0.0.1', 'localhost']
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
