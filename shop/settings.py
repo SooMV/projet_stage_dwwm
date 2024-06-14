@@ -26,7 +26,7 @@ environ.Env.read_env(BASE_DIR/".env")
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-@)#svm0=)e+g%fnu(-kd=px)!gu4aga-b5%e$6(0c88#zb4qm6"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -199,8 +199,8 @@ RECAPTCHA_ERROR_MSG = {
     'connection_error': 'Une erreur de connexion s\'est produite. Veuillez vérifier votre connexion Internet et réessayer.'
 }
 
-RECAPTCHA_PUBLIC_KEY = '6LciBPEpAAAAALKAmBLjU44Zo_fIyiqXk2_L7clV'
-RECAPTCHA_PRIVATE_KEY = '6LciBPEpAAAAAOMKjnBjRzPu3HrufAkTHHd44HJm'
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 
 
 JAZZMIN_SETTINGS = {
