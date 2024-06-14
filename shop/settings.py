@@ -37,7 +37,7 @@ DEBUG = True
 # settings.py
 
 
-ALLOWED_HOSTS = ['https://projet-stage-dwwm.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['projet-stage-dwwm.onrender.com', '127.0.0.1', 'localhost']
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
