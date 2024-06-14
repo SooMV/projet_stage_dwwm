@@ -34,8 +34,11 @@ SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+ALLOWED_HOSTS1= env("ALLOWED_HOSTS1")
+ALLOWED_HOSTS2= env("ALLOWED_HOSTS2")
+ALLOWED_HOSTS3=env("ALLOWED_HOSTS3")
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://projet-stage-dwwm.onrender.com']
+ALLOWED_HOSTS = [ALLOWED_HOSTS1, ALLOWED_HOSTS2, ALLOWED_HOSTS3]
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -109,8 +112,10 @@ DATABASES = {
 }
 
 
+DATABASE_URL= env("DATABASE_URL")
 # URL la db sur render 
-DATABASES["default"] = dj_database_url.parse("postgres://projet_stage_dwwm_user:UiJYXWbVUnVVDrW44tbzvW8SW9HOE3SI@dpg-cpm3djlds78s738t4nl0-a.frankfurt-postgres.render.com/projet_stage_dwwm")
+
+DATABASES["default"] = dj_database_url.parse(DATABASE_URL)
 
  
 
