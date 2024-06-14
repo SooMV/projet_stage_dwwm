@@ -1,0 +1,29 @@
+/* Changer la couleur de fond de la barre latérale */
+.nav-header {
+   color: #000 !important;
+}
+
+/* Changer la couleur du texte de la barre latérale */
+.sidebar .nav-link, .sidebar .nav-link span {
+    color: #000 !important;
+}
+
+/* Changer la couleur des liens de la barre latérale */
+.sidebar .nav-link:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+/* Changer la couleur des liens actifs de la barre latérale */
+.sidebar .admin-nav-link.active {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+
+
+ul > li {
+    list-style-type: none !important; 
+    padding: 1px 0;
+}
+

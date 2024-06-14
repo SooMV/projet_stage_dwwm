@@ -1,0 +1,24 @@
+.link_nav{
+    color:#000 !important;
+}
+#img_homme, #img_femme{
+    width: 450px;
+    filter: blur(0.25px) brightness(100%) contrast(120%) opacity(81%) 
+  
+}
+
+.text-img{
+    top: 40%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.btn-cta-hompage{
+    top: 70%; left: 50%; transform: translate(-50%, -50%);
+}
+
+.widget_mondial_relay {
+    color: blue;
+}
