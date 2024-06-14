@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-4/5 mx-auto ">
+    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">Résulat de votre recherche</h1>
+</div>
+
+<hr>
+
+<div class="container flex items-center justify-center my-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for produit in resultats %}
+        <div class="max-w-xs rounded-md overflow-hidden shadow-2xl">
+                <img src="{{ product.thumbnails1.url }}" alt="{{ product.name }}">
+            <div class="px-4 pt-2">
+                <div class="font-bold text-lg mb-2">{{ product.name }}</div>
+            </div>
+            <div class="px-4 ">
+                <div class="flex justify-between items-center">
+                    <span class="font-light text-lg">{{ product.price | floatformat }} €</span>
+                </div>
+               
+            </div>
+            <div class="px-5 py-5 flex justify-center">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md text-sm mx-auto">
+                    Ajouter au panier
+                </button>
+                <a href="{% url 'product' product.slug %}" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1 px-3 rounded-md text-sm mx-auto">
+                    Voir les détails
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="container w-4/5 mx-auto ">
+            <h1 class="text-xl font-bold text-black text-center mt-10 mb-5">Aucun produit trouvé</h1>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="container w-4/5 mx-auto">
+    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">{% trans "Choose your shipment destination" %}</h1>
+    <hr class="mt-10">
+
+    <!-- Widget Mondial Relay -->
+    <div class="w-full h-auto mx-auto my-10 rounded-xl">
+        <div id="Zone_Widget" class="h-96"></div>
+    </div>
+
+   
+
+    <div class="flex justify-evenly items-center mx-auto mt-20">
+        
+        <div class="p-8 space-y-4 w-full max-w-md">
+           <div class="container mb-5 flex justify-center items-center">
+                <svg class="w-10 h-10 text-gray-800 dark:text-white inline-block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12c.263 0 .524-.06.767-.175a2 2 0 0 0 .65-.491c.186-.21.333-.46.433-.734.1-.274.15-.568.15-.864a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 12 9.736a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 16 9.736c0 .295.052.588.152.861s.248.521.434.73a2 2 0 0 0 .649.488 1.809 1.809 0 0 0 1.53 0 2.03 2.03 0 0 0 .65-.488c.185-.209.332-.457.433-.73.1-.273.152-.566.152-.861 0-.974-1.108-3.85-1.618-5.121A.983.983 0 0 0 17.466 4H6.456a.986.986 0 0 0-.93.645C5.045 5.962 4 8.905 4 9.736c.023.59.241 1.148.611 1.567.37.418.865.667 1.389.697Zm0 0c.328 0 .651-.091.94-.266A2.1 2.1 0 0 0 7.66 11h.681a2.1 2.1 0 0 0 .718.734c.29.175.613.266.942.266.328 0 .651-.091.94-.266.29-.174.537-.427.719-.734h.681a2.1 2.1 0 0 0 .719.734c.289.175.612.266.94.266.329 0 .652-.091.942-.266.29-.174.536-.427.718-.734h.681c.183.307.43.56.719.734.29.174.613.266.941.266a1.819 1.819 0 0 0 1.06-.351M6 12a1.766 1.766 0 0 1-1.163-.476M5 12v7a1 1 0 0 0 1 1h2v-5h3v5h7a1 1 0 0 0 1-1v-7m-5 3v2h2v-2h-2Z"/>
+                </svg>
+                
+                <h2 class="text-2xl font-bold text-black text-center inline-block">{% translate " Relay point selected :" %}</h2>
+            </div>
+            <div class="flex align-center justify-start">
+                <p>{% translate "Relay Point Name : " %}</p> 
+                <span class="ml-2  font-bold"  id="cb_Nom"></span>
+            </div>    
+            <div class="flex align-center justify-start">
+                <p>{% translate "Address : " %}</p>
+                <span class="ml-2  font-bold"  id="cb_Adresse"></span>
+            </div>   
+            <div class="flex align-center justify-start"> 
+                <p>{% translate "Zip Code : " %}</p><span class="ml-2 font-bold" id="cb_CP"></span>
+            </div>
+            <div class="flex align-center justify-start"> 
+                <p>{% translate "City : " %}</p><span class="ml-2  font-bold" id="cb_Ville"></span>
+        
+            </div>
+        </div>
+        <div class="w-1 bg-gray-200 rounded-full h-64"></div>
+
+        <div class="p-6 space-y-4 w-full ">
+            <div class="container mb-5 flex justify-center items-center">
+                <img src="{% static "images/bills.png" %}" class="h-10 w-10 mr-3" alt="icone bills">
+                <h2 class="text-2xl font-bold text-black text-center inline-block">{% translate " Order summary :" %}</h2>
+                </div>
+                {% for form in forms %}
+                <div class="flex align-center justify-center">
+                <p class="font-manrope font-bold text-md leading-9 text-gray-900">  {{ form.instance.product.quantity }}</p>
+                <p class="font-manrope font-bold text-md leading-9 text-gray-900">  {{ form.instance.product.name }}</p>
+                <p class="font-manrope font-bold text-md  text-right">{{ form.instance.product.price |floatformat:2 }} €</p>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    <div class="container mx-auto">
+        <img class="w-5/12 ml-10" src="{% static 'images/Stripe-paiement.png' %}" alt="mode de paiement">
+        
+        <div class="w-1/2 mt-10 ml-20">
+            <div class="flex  gap-4">
+                <div>
+                    <button class="rounded-md py-3 px-12 bg-black text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 inline-flex items-center justify-center">
+                        <svg class="w-7 h-7 text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.537 12.625a4.421 4.421 0 0 0 2.684 4.047 10.96 10.96 0 0 1-1.384 2.845c-.834 1.218-1.7 2.432-3.062 2.457-1.34.025-1.77-.794-3.3-.794-1.531 0-2.01.769-3.275.82-1.316.049-2.317-1.318-3.158-2.532-1.72-2.484-3.032-7.017-1.27-10.077A4.9 4.9 0 0 1 8.91 6.884c1.292-.025 2.51.869 3.3.869.789 0 2.27-1.075 3.828-.917a4.67 4.67 0 0 1 3.66 1.984 4.524 4.524 0 0 0-2.16 3.805m-2.52-7.432A4.4 4.4 0 0 0 16.06 2a4.482 4.482 0 0 0-2.945 1.516 4.185 4.185 0 0 0-1.061 3.093 3.708 3.708 0 0 0 2.967-1.416Z"/>
+                        </svg>
+                        {% trans "ApplePay" %}
+                    </button>
+                </div>
+                <div>
+                    <form action="{% url 'create-checkout-session' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="rounded-md py-3 px-12 bg-green-600 text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-green-700">
+                            {% trans "Pay" %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+        
+        
+        
+        
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', (function() {
+            $("#Zone_Widget").MR_ParcelShopPicker({
+              Target: "#Target_Widget",
+              
+              Brand: "BDTEST  ",
+              // Default Country (2 letters) used for search at loading
+              Country: "FR",
+              // Default postal Code used for search at loading
+              PostCode: "75001",
+              // Delivery mode (Standard [24R], XL [24L], XXL [24X], Drive [DRI])
+              ColLivMod: "24R",
+              // Number of parcelshops requested (must be less than 20)
+              NbResults: "7",
+              TargetDisplay: "#TargetDisplay_Widget",
+              TargetDisplayInfoPR: "#TargetDisplayInfoPR_Widget",
+            
+              
+              Responsive: true,
+                  // Show the results on Leaflet map usng OpenStreetMap. 
+              ShowResultsOnMap: true,
+              EnableGeolocalisatedSearch : true,
+              OnParcelShopSelected:
+              function(data) {
+                $("#cb_ID").html(data.ID);
+                $("#cb_Nom").html(data.Nom);
+                $("#cb_Adresse").html(data.Adresse1 + ' ' + data.Adresse2);
+                $("#cb_CP").html(data.CP);
+                $("#cb_Ville").html(data.Ville);
+                $("#cb_Pays").html(data.Pays);
+                }
+            });
+          
+          }));
+    </script>
+
+    
+{% endblock %}

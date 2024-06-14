@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static jazzmin %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; width: 100%;">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 h-50 rounded-2xl" style="padding-right: 10px; flex-grow: 1;">
+        <div class="card rounded-2xl">
+            <div class="card-header">
+                <h5 class="m-0">{% trans "Average customer cart per day" %}</h5>
+            </div>
+            <div class="card-body">
+                <img src="{{ daily_chart_uri }}" alt="{% trans "Evolution of the Average Basket per Month" %}" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 h-50 rounded-2xl" style="padding-left: 10px; flex-grow: 1;">
+        <div class="card rounded-2xl">
+            <div class="card-header">
+                <h5 class="m-0">{% trans "Evolution of the Average customer cart per Month" %}</h5>
+            </div>
+            <div class="card-body">
+                <div id="plotly-pie-chart">
+                    <img src="{{ monthly_chart_uri }}" alt="{% trans "Evolution of the Average customer cart per Month" %}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ block.super }}
+{% endblock %}

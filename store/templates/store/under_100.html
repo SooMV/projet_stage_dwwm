@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-4/5 mx-auto ">
+    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">Moins de 100 €</h1>
+   
+   
+   
+    {% comment %} Affichage des produtis  {% endcomment %}
+
+  <div class="container flex items-center justify-center my-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for product in object_list %}
+        <div class="max-w-xs rounded-md overflow-hidden shadow-2xl">
+                <img src="{{ product.thumbnails1.url }}" alt="{{ product.name }}">
+            <div class="px-4 pt-2">
+                <div class="font-bold text-lg mb-2">{{ product.name }}</div>
+            </div>
+            <div class="px-4 ">
+                <div class="flex justify-between items-center">
+                    <span class="font-light text-lg">{{ product.price | floatformat }} €</span>
+                </div>
+               
+            </div>
+            <div class="px-5 py-5 flex justify-center">
+                <a href="{% url 'add-to-cart' product.slug %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md text-sm mx-auto">
+                    Ajouter au panier
+                </a>
+                <a href="{% url 'product' product.slug %}" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1 px-3 rounded-md text-sm mx-auto">
+                    Voir les détails
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+        {% comment %} {% empty %} -> Si aucun produit  {% endcomment %}
+        {% empty %}
+        <div class="container self-auto my-20">
+            <h1 class="text-3xl font-bold text-black text-center">Aucun produits disponibles...</h1>
+        </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+    
+        
+        
+
+
+  
+  
+{% endblock %}

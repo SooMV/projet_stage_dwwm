@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-4/5 mx-auto ">
+    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">Plus de 200€</h1>
+    <hr class="mt-10">
+    <div class="container flex items-center justify-center my-2 gap-20">
+        <p>Filtrer par :</p>
+        <button id="dropdownCategorieButton" data-dropdown-toggle="dropdown_categorie" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-8 py-2 rounded dark:bg-gray-700 dark:text-gray-300 border border-gray-300 border-solid hover:bg-black hover:text-white transition-colors duration-300 ease-in-out text-center inline-flex items-center " type="button">Catégorie <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+            </button>
+            
+            <!-- Dropdown button for Categories -->
+            <div id="dropdown_categorie" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    {% for categorie in categories %}
+                 <li>
+                    <a href="{% url 'products_by_category' category_slug=categorie.slug %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ categorie.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+            </div>
+            <!-- Dropdown menu for Categories -->
+            <div id="dropdownFilterPriceButton" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownFilterPriceButton">
+                    
+                    <li>
+                        <a href="{% url 'products-under-100' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> Moins de 100€</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products-between-100-and-200' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">100€ - 200€</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products-above-200' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Plus de 200€</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products-50-percent-off' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promotions à -50%</a>
+                    </li>
+                   
+                </ul>
+            </div>
+            
+                <button id="dropdownFilterPriceButton" data-dropdown-toggle="dropdownFilterPriceButton" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-8 py-2 rounded dark:bg-gray-700 dark:text-gray-300 border border-gray-300 border-solid hover:bg-black hover:text-white transition-colors duration-300 ease-in-out text-center inline-flex items-center " type="button">Prix <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+                
+            
+            
+            
+            
+            </div>
+            <hr>
+            </div>
+        </div>
+
+          {% comment %} Affichage des produtis  {% endcomment %}
+
+
+          <div class="container flex items-center justify-center my-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for product in object_list %}
+                <div class="max-w-xs rounded-md overflow-hidden shadow-2xl">
+                        <img src="{{ product.thumbnails1.url }}" alt="{{ product.name }}">
+                    <div class="px-4 pt-2">
+                        <div class="font-bold text-lg mb-2">{{ product.name }}</div>
+                    </div>
+                    <div class="px-4 ">
+                        <div class="flex justify-between items-center">
+                            <span class="font-light text-lg">{{ product.price | floatformat }} €</span>
+                        </div>
+                       
+                    </div>
+                    <div class="px-5 py-5 flex justify-center">
+                        <a href="{% url 'add-to-cart' product.slug %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md text-sm mx-auto">
+                            Ajouter au panier
+                        </a>
+                        <a href="{% url 'product' product.slug %}" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1 px-3 rounded-md text-sm mx-auto">
+                            Voir les détails
+                        </a>
+                    </div>
+                </div>
+                {% comment %} {% empty %} -> Si aucun produit  {% endcomment %}
+                {% empty %}
+                <div class="container w-4/5 mx-auto ">
+                    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">Aucun produit ne correspond à cette catégorie</h1>
+                </div>
+                    {% endfor %}
+            </div>
+        </div>
+{% endblock %}

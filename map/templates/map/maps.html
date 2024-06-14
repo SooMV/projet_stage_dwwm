@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto row flex">
+    <div class="w-3/6 my-20 mx-20">
+        <h1 class="m-5 text-3xl font-light">Nos boutiques</h1>
+        <br>
+        {% blocktranslate with boutiques_count=boutiques_count %}
+        Welcome to LoremBoutique, your ultimate destination for streetwear and urban clothing. 
+        Whether you are looking for the latest trends or classic pieces to complete your wardrobe, we have what you need.
+        We have {{ boutiques_count }} shops available, offering a wide range of clothing, shoes and accessories from renowned brands.
+        {% endblocktranslate %}
+        <br>
+        <p class="text-justify font-extralight text-xl">
+            {% blocktranslate %}
+            Come and discover our collections and be inspired by our exclusive selection.
+            Whether you’re passionate about sneakers, a fan of streetwear clothing or simply looking for your next look,. LoremBoutique is the perfect place for you. 
+            Join us for an unforgettable shopping experience and find your style at Street Style Boutique!
+            {% endblocktranslate %}
+        </p>
+    </div>
+    <div class="w-3/6 my-20 mx-20">
+        <div class="container flex flex-col items-center justify-center gap-20">   
+            {% for boutique in boutiques %}
+            <a href="{% url 'boutique_details' boutique.id %}" class="w-36 h-36 bg-yellow-400 hover:bg-black hover:text-white transition-colors duration-300 ease-in-out text-black font-thin text-2xl flex items-center justify-center rounded-xl border border-gray-400 border-solid">
+                {{ boutique.ville }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

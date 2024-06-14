@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+
+{% if messages %}
+        {% for message in messages %}
+            <div class="bg-blue-500 text-white font-thin p-4 rounded-lg shadow-md alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+<h1>Bonjour</h1>
+
+
+    {% endblock %}

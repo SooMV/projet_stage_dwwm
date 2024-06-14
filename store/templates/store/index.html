@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static  %}
+{% comment %} bibliothèque de tags de traduction {% endcomment %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+  <div  class=" w-full bg-black text-white text-xl flex justify-center items-center font-bold p-2  shadow-md mt-30">
+    {% translate "Welcome" %} {{ user.email }} ! 
+  </div>
+{% else %}
+    <div id="element"  class=" w-full bg-black text-white text-xl flex justify-center items-center font-bold p-2  shadow-md mt-30">
+        {% translate "Welcome" %} {{ user.email }} ! 
+    </div>
+  
+
+{% endif %} 
+
+
+<div class="flex align-center justify-center w-full gap-20 h-4/6 mt-20">
+    <div class="relative flex flex-col items-center">
+        <img id="img_femme" class="rounded-lg img_femme" src="{% static 'images/categorie_femme.webp' %}" alt="">
+        <h1 class="absolute text-img rounded-xl">{% translate "Woman" %}</h1>
+        <a href="{% url 'category' category_slug='femme' %}" class="absolute bg-yellow-400 px-8 py-2 text-xl rounded-full text-black btn-cta-hompage hover:bg-black hover:text-white transition-colors duration-300 ease-in-out">
+            {% translate "Let's see" %}
+        </a>
+    </div>
+    <div class="relative flex flex-col items-center">
+        <img id="img_homme" class="rounded-lg img_homme" src="{% static 'images/categorie_homme.webp' %}" alt="">
+        <h1 class="absolute text-img rounded-xl">{% translate "Men" %}</h1>
+        <a href="{% url 'category' category_slug='homme' %}" class="absolute bg-yellow-400 px-8 py-2 text-xl rounded-full text-black btn-cta-hompage hover:bg-black hover:text-white transition-colors duration-300 ease-in-out">
+            {% translate "Let's see" %}
+        </a>
+    </div>
+</div>
+
+
+<div class="container w-4/5 mx-auto ">
+    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">{% translate "Latest products added" %}</h1>
+    <hr class="mt-10 w-5/6 mx-auto">
+</div>
+<div class="container flex items-center justify-center my-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for product in latest_products  %}
+        <div class="max-w-xs rounded-md overflow-hidden shadow-2xl">
+                <img src="{{ product.thumbnails1.url }}" alt="{{ product.name }}">
+            <div class="px-4 pt-2">
+                <div class="font-bold text-lg mb-2">{{ product.name }}</div>
+            </div>
+            <div class="px-4 ">
+                <div class="flex justify-between items-center">
+                    <span class="font-light text-lg">{{ product.price | floatformat }} €</span>
+                </div>
+               
+            </div>
+            <div class="px-5 py-5 flex justify-center">
+                <a href="{% url 'add-to-cart' product.slug %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md text-sm mx-auto">
+                    {% translate "Add to cart" %} 
+                </a>
+                <a href="{% url 'product' product.slug %}" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-1 px-3 rounded-md text-sm mx-auto">
+                    {% translate "See details" %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+    var typed = new Typed('#element', {
+      strings: ['Welcome to your service...', 'Receive 10% off all new registrations'],
+      typeSpeed: 50,
+  
+      showCursor: false,
+      
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

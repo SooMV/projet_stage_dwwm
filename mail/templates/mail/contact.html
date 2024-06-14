@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="flex flex-col items-start justify-start h-screen">
+    <div class="w-full h-3/6 bg-yellow-400 flex items-start justify-between p-10 z-10">
+        <div class="w-1/2 space-y-4">
+            <h1 class="text-2xl font-medium text-white">{% trans "Contact Us" %}</h1>
+            <p class="text-xl font-normal text-white">{% trans "Feel free to contact us! Submit your questions here and we'll get back to you as soon as possible." %}</p>
+        </div>
+        <div class="w-1/2 flex justify-center items-center">
+            <div class="p-8 space-y-6 bg-gray-200 rounded-lg shadow-md w-4/5 z-20">
+                <h1 class="text-xl font-thin text-black text-left mt-5 mb-8">{% trans "Send Us a Message" %}</h1>
+                <form method="POST" action="{% url 'contact_us' %}">
+                    {% csrf_token %}
+                    <label for="name" class="block text-black text-sm font-medium text-gray-700 my-2"></label>
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required
+                        class="block w-full my-7 px-3 py-2 border border-gray-300 rounded-full shadow-sm placeholder-gray-400
+                                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    
+                    <label for="subject" class="block text-black text-sm font-medium text-gray-700 my-2"></label>
+                    <input type="text" id="subject" name="subject" required placeholder="L'objet de votre demande"
+                        class="my-7 block w-full px-3 py-2 border border-gray-300 rounded-full shadow-sm placeholder-gray-400
+                                focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+    
+                    
+                                <label for="message" class="block text-black text-sm font-medium text-gray-700 my-2"></label>
+                    <textarea name="message"   rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                            placeholder="Veuillez entrez votre message ici..." id="message"></textarea>
+                            <br>
+                    <button type='submit' class="w-full mt-5 mb-3 flex justify-center py-2 px-4 border border-transparent rounded-full  shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black-500"> Envoyer </button>
+    
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="w-full h-3/5 flex  bg-transparent">
+       <div class="container flex mx-10 mt-20">
+        <ul class="space-y-4">
+            <li class="flex items-center space-x-2">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"/>
+                </svg>
+                <span>01 - XX - XX - XX XX</span>
+            </li>
+            <li class="flex items-center space-x-2">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2.038 5.61A2.01 2.01 0 0 0 2 6v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-.12-.01-.238-.03-.352l-.866.65-7.89 6.032a2 2 0 0 1-2.429 0L2.884 6.288l-.846-.677Z"/>
+                    <path d="M20.677 4.117A1.996 1.996 0 0 0 20 4H4c-.225 0-.44.037-.642.105l.758.607L12 10.742 19.9 4.7l.777-.583Z"/>
+                </svg>
+                <span>loremipsum@gmail.com</span>
+            </li>
+            <li class="flex items-center mb-6 space-x-2">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M5 9a7 7 0 1 1 8 6.93V21a1 1 0 1 1-2 0v-5.07A7.001 7.001 0 0 1 5 9Zm5.94-1.06A1.5 1.5 0 0 1 12 7.5a1 1 0 1 0 0-2A3.5 3.5 0 0 0 8.5 9a1 1 0 0 0 2 0c0-.398.158-.78.44-1.06Z" clip-rule="evenodd"/>
+                </svg>
+                <span>123, RUE DE LA BZHVUEHRDJOC</span>
+            </li>
+            <hr>
+            <div>
+                <ul class="flex items-center space-x-4">
+                    <li><img class="w-10 h-10 rounded" src="{% static 'images/icone_media/fb.svg' %}" alt=""></li>
+                    <li><img class="w-10 h-10 rounded" src="{% static 'images/icone_media/insta.webp' %}"  alt=""></li>
+                    <li><img class="w-10 h-10 rounded" src="{% static 'images/icone_media/linkedin.svg' %}" alt=""></li>
+                    <li><img class="w-10 h-10 rounded" src="{% static 'images/icone_media/x.svg' %}" alt=""></li>
+                    <li><img class="w-10 h-10 rounded" src="{% static 'images/icone_media/youtube.svg' %}" alt=""></li>
+                </ul>
+            </div>
+        </ul>              
+       </div>
+       
+    </div>
+    
+</div>
+
+
+
+
+{% endblock %}

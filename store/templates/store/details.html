@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container mx-auto px-2 h-screen flex items-center justify-between mb-10">
+    <div class="grid grid-cols-2  my-auto mx-auto gap-20">
+        <div class="flex flex-col items-center">
+            <img style="width:450px;" data-modal-target="first_picture" data-modal-toggle="first_picture" src="{{ product.thumbnails1.url }}" alt="{{ product.name }}"  class=" rounded-3xl hover:opacity-60 cursor-pointer mt-8" >
+            
+            <div id="first_picture" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div class="relative w-full max-w-2xl max-h-full">
+                  <div class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
+                    <img data-modal-target="first_picture" data-modal-toggle="first_picture" src="{{ product.thumbnails1.url }}" alt="{{ product.name }}"  class="w-screen rounded-2xl" >
+                  </div>
+              </div>
+          </div>
+            
+            <div class="flex justify-center items-center gap-5 mt-5">
+                <img data-modal-target="second_picture" data-modal-toggle="second_picture" class="w-auto h-28 rounded-xl hover:opacity-60 cursor-pointer" src="{{ product.thumbnails2.url }}" alt="{{ product.name }}">
+                  <div id="second_picture" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                  <div class="relative w-full max-w-2xl max-h-full">
+                      <div class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
+                        <img data-modal-target="second_picture" data-modal-toggle="second_picture" src="{{ product.thumbnails2.url }}" alt="{{ product.name }}"  class="w-screen rounded-2xl" >
+                      </div>
+                  </div>
+                  </div>
+
+                <img data-modal-target="third_picture" data-modal-toggle="third_picture" class="w-auto h-28 rounded-xl hover:opacity-60 cursor-pointer" src="{{ product.thumbnails3.url }}" alt="{{ product.name }}">
+                <div id="third_picture" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                  <div class="relative w-full max-w-2xl max-h-full">
+                      <div class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
+                        <img data-modal-target="third_picture" data-modal-toggle="third_picture" src="{{ product.thumbnails3.url }}" alt="{{ product.name }}"  class="w-screen rounded-2xl" >
+                      </div>
+                  </div>
+                </div>
+
+                <img data-modal-target="fourth_picture" data-modal-toggle="fourth_picture" class="w-auto h-28 rounded-xl hover:opacity-60 cursor-pointer" src="{{ product.thumbnails4.url }}" alt="{{ product.name }}">
+                <div id="fourth_picture" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                  <div class="relative w-full max-w-2xl max-h-full">
+                      <div class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
+                        <img data-modal-target="fourth_picture" data-modal-toggle="fourth_picture" src="{{ product.thumbnails4.url }}" alt="{{ product.name }}"  class="w-screen rounded-2xl" >
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="max-w-sm rounded-xl overflow-hidden bg-gray-200 shadow-xl">
+              <div class="px-4 py-4">
+                  <div class="font-bold text-2xl mb-2">{{ product.name }}</div>
+              </div>
+              <div class="px-4 py-2">
+                  <div class="flex justify-between items-center">
+                      <span class="font-bold text-lg">{{ product.price | floatformat }} €</span>
+                  </div>
+                  <br>
+                  <div class="flex justify-between items-center">
+                      <span class="font-light text-sm">{{ product.short_description }}</span>
+                      <br>
+                  </div>
+                  <br>
+                
+              </div>
+              
+              <div class="px-4 py-2">
+                <div class="font-bold text-md mb-5">{% translate "Available size" %}</div>
+    
+                <div class="flex space-x-2">
+                    {% for product_taille in product_tailles %}
+                        <div class="flex flex-col items-center">
+                            <div class="{% if product_taille.stock == 0 %} bg-red-600 text-white {% else %} bg-green-400 {% endif %} rounded-full h-10 w-10 flex items-center justify-center">
+                                {{ product_taille.taille.taille }}
+                            </div>
+                            <div class="text-sm mt-1">
+                                {% if product_taille.stock == 0 %}
+                                    <span class="text-red-500">{% translate "Stock-out" %}</span>
+                                {% else %}
+                                    <span class="text-green-500">{% translate "Available"%}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+              <br>
+              <div class="px-5 py-5 flex justify-center">
+                  <a href="{% url 'add-to-cart' product.slug %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md text-sm">
+                    {% translate "Add to cart"%}
+                  </a>
+              </div>
+          </div>
+          </div>      
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto mt-35 mb-10 w-full px-10 ">
+    <table class="table-auto w-full mx-auto ">
+      <thead class="border-b border-black">
+        <tr class="bg-yellow-400 w-full">
+          <th class="px-4 py-2  text-xl text-black ">{% translate "Description" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-gray-200">
+          <td class="px-4 py-5 border font-light">{{ product.long_description}}</td>
+        </tr>
+        <tr class="bg-yellow-400 w-full">
+          <th class="px-4 py-2  text-xl text-black ">{% translate "Product material" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-gray-200">
+          <td class="px-4 py-5 border font-light ">{{ product.matiere }}</td>
+        </tr>
+        <tr class="bg-yellow-400 w-full">
+          <th class="px-4 py-2 text-xl text-black ">{% translate "Color" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-gray-200">
+          <td class="px-4 py-5 border font-light ">{{ product.couleur }}</td>
+        </tr>
+        <tr class="bg-yellow-400 w-full">
+          <th class="px-4 py-2 text-xl text-black ">{% translate "Category" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-gray-200">
+          <td class="px-4 py-5 border font-light ">{{ product.categorie }}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  
+
+
+
+
+
+
+  
+
+{% endblock %}

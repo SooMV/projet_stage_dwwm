@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container w-4/5 mx-auto ">
+    <h1 class="text-3xl font-bold text-black text-center mt-10 mb-5">{% trans %}By size :{% endtrans %}</h1>
+    <hr class="mt-10">
+    <div class="container flex items-center justify-center my-2 gap-20">
+        <p>{% trans %}Filter by :{% endtrans %}</p>
+
+        <button id="dropdownCategorieButton" data-dropdown-toggle="dropdown_categorie" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-8 py-2 rounded dark:bg-gray-700 dark:text-gray-300 border border-gray-300 border-solid hover:bg-black hover:text-white transition-colors duration-300 ease-in-out text-center inline-flex items-center " type="button">Catégorie <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+            </button>
+            
+            <!-- Dropdown button for Categories -->
+            <div id="dropdown_categorie" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    {% for categorie in categories %}
+                 <li>
+                    <a href="{% url 'products_by_category' category_slug=categorie.slug %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ categorie.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+            </div>
+            <!-- Dropdown menu for Categories -->
+            <div id="dropdownFilterPriceButton" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownFilterPriceButton">
+                    
+                    <li>
+                        <a href="{% url 'products-under-100' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{% trans %}Less than £100{% endtrans %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products-between-100-and-200' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{% trans %}Between £100 and £200{% endtrans %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products-above-200' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{% trans %}More than £200{% endtrans %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products-50-percent-off' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{% trans %} promotion -50% {% endtrans %}</a>
+                    </li>
+                   
+                </ul>
+            </div>
+            
+                <button id="dropdownFilterPriceButton" data-dropdown-toggle="dropdownFilterPriceButton" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-8 py-2 rounded dark:bg-gray-700 dark:text-gray-300 border border-gray-300 border-solid hover:bg-black hover:text-white transition-colors duration-300 ease-in-out text-center inline-flex items-center " type="button">Prix <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+                </button>
+                
+            
+            
+            
+            
+            </div>
+            <hr>
+            </div>
+        </div>
+    
+        
+        
+    </div>
+    <hr>
+</div>
+
+{% endblock %}
